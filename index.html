@@ -532,6 +532,74 @@
     background: var(--border);
     margin: 32px 0;
   }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--yellow);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+
+  .info-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .info-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .info-steps { display: flex; flex-direction: column; gap: 10px; }
+
+  .info-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    background: var(--yellow);
+    color: #000;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .info-toggle {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    cursor: pointer;
+    padding: 0;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+  }
+  .info-toggle:hover { color: var(--yellow); }
+
 </style>
 </head>
 <body>
@@ -545,6 +613,31 @@
 </header>
 
 <div class="container">
+
+  <!-- 설명 박스 -->
+  <div class="info-box">
+    <div class="info-title">📱 Kakao Feed Observer란?</div>
+    <div class="info-desc">카카오톡 피드 방문자 시점을 미리 볼 수 있는 도구입니다!!</div>
+    <button class="info-toggle" onclick="toggleGuide()" id="guide-toggle">▼ 사용방법 보기</button>
+    <div class="info-steps" id="guide-steps" style="display:none;">
+      <div class="info-step">
+        <div class="step-num">1</div>
+        <div>본인 카카오톡 피드에 들어가 사진을 순서대로 다운 받습니다.</div>
+      </div>
+      <div class="info-step">
+        <div class="step-num">2</div>
+        <div>이미지를 드래그 하여 한번에 업로드 시킵니다. <span style="color:var(--yellow);">( 처음 선택한게 제일 위로 가는 구조 )</span></div>
+      </div>
+      <div class="info-step">
+        <div class="step-num">3</div>
+        <div>카카오톡 피드에 맞게 전체공개와 나만보기를 설정해주면 완성!</div>
+      </div>
+      <div class="info-step">
+        <div class="step-num">4</div>
+        <div>사이트 내용은 저장되며 그 이후에는 한 장씩 추가하면 됩니다.</div>
+      </div>
+    </div>
+  </div>
 
   <!-- 뷰 토글 -->
   <div class="view-toggle">
@@ -882,6 +975,15 @@ function renderAll() {
   renderGrids();
   renderPostList();
   renderStats();
+}
+
+// ── GUIDE TOGGLE ──
+function toggleGuide() {
+  const steps = document.getElementById('guide-steps');
+  const btn = document.getElementById('guide-toggle');
+  const isHidden = steps.style.display === 'none';
+  steps.style.display = isHidden ? 'flex' : 'none';
+  btn.textContent = isHidden ? '▲ 사용방법 닫기' : '▼ 사용방법 보기';
 }
 
 // ── INIT ──
